@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/cyberbot143/React-Core-Concepts-Flux-Demo#readme",
   "dependencies": {
+    "babel-core": "^6.26.0",
     "bootstrap": "^3.3.5",
     "browserify": "^11.0.1",
     "flux": "^2.0.3",
@@ -32,9 +33,14 @@
     "gulp-eslint": "^0.15.0",
     "gulp-open": "^1.0.0",
     "jquery": "^2.1.4",
+    "lodash": "^4.17.4",
     "react": "^0.13.0",
     "react-router": "^0.13.3",
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "gulp-babel": "^7.0.0"
   }
 }
