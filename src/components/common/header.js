@@ -1,5 +1,7 @@
 "use strict";
 var React = require("react");
+var Router = require("react-router");
+var Link = Router.Link;
 
 var Header = React.createClass({
   render: function() {
@@ -14,13 +16,13 @@ var Header = React.createClass({
           </div>
           <ul className="nav navbar-nav">
             <li>
-              <a href="#">Home</a>
+                <Link to="app"> Home </Link>
             </li>
             <li>
-              <a href="/#about">About</a>
+              <Link to="about"> About </Link>
             </li>
             <li>
-              <a href="/#authors">Authors</a>
+              <Link to="authors"> Authors </Link>
             </li>
           
           </ul>
