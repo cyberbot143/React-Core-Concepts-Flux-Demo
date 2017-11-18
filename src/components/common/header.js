@@ -24,7 +24,6 @@ var Header = React.createClass({
             <li>
               <Link to="authors"> Authors </Link>
             </li>
-          
           </ul>
         </div>
       </nav>

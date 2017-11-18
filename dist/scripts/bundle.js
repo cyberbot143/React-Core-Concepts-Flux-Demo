@@ -49176,6 +49176,8 @@ module.exports = {
 $ = jQuery = require("jquery");
 var React = require("react");
 var Header = require('../components/common/header');
+var Footer = require('../components/common/footer');
+
 var RouteHandler = require('react-router').RouteHandler;
 
 var App = React.createClass({displayName: "App",
@@ -49184,18 +49186,32 @@ var App = React.createClass({displayName: "App",
     return (   
       React.createElement("div", null, 
       React.createElement(Header, null), 
-      React.createElement(RouteHandler, null)
+      React.createElement(RouteHandler, null), 
+      React.createElement(Footer, null)
       )
     );
   }
 });
 
 module.exports = App;
-},{"../components/common/header":204,"jquery":1,"react":197,"react-router":28}],201:[function(require,module,exports){
+},{"../components/common/footer":204,"../components/common/header":205,"jquery":1,"react":197,"react-router":28}],201:[function(require,module,exports){
 "use strict";
 var React = require("react");
 
 var About = React.createClass({displayName: "About",
+  statics: {
+    willTransitionTo: function name(transition, params, query, callback) {
+       if(!confirm("Are you sure want to go to About Page")){
+            transition.abort();
+       }else{
+            callback();
+       }
+  },
+  willTransitionFrom: function name(transition, component) {
+        if (!confirm("Are you sure want to go to leave this page")) {
+          transition.abort();
+        }
+  }},
   render: function() {
     return (
       React.createElement("div", null, 
@@ -49281,6 +49297,24 @@ module.exports = Authors;
 },{"../../Api/authorApi":198,"./authorList":202,"react":197}],204:[function(require,module,exports){
 "use strict";
 var React = require("react");
+
+
+var Footer = React.createClass({displayName: "Footer",
+  render: function() {
+     return React.createElement("footer", {className: "footer navbar-fixed-bottom"}, 
+         React.createElement("h4", null, 
+           "_Copyright @2017 Marlabs Inc. All Rights Reserved. Contact information: ", React.createElement("a", {href: "mailto:someone@example.com"}, 
+             "someone@example.com"
+           ), "."
+         )
+       );
+
+  }});
+
+module.exports = Footer;
+},{"react":197}],205:[function(require,module,exports){
+"use strict";
+var React = require("react");
 var Router = require("react-router");
 var Link = Router.Link;
 
@@ -49305,7 +49339,6 @@ var Header = React.createClass({displayName: "Header",
             React.createElement("li", null, 
               React.createElement(Link, {to: "authors"}, " Authors ")
             )
-          
           )
         )
       )
@@ -49314,7 +49347,7 @@ var Header = React.createClass({displayName: "Header",
 });
 
 module.exports = Header;
-},{"react":197,"react-router":28}],205:[function(require,module,exports){
+},{"react":197,"react-router":28}],206:[function(require,module,exports){
 "use strict";
 
 var React = require("react");
@@ -49341,32 +49374,52 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":197,"react-router":28}],206:[function(require,module,exports){
+},{"react":197,"react-router":28}],207:[function(require,module,exports){
+"use strict";
+var React = require("react");
+
+var NotFoundPage = React.createClass({displayName: "NotFoundPage",
+  render: function() {
+    return (
+      React.createElement("div", null, 
+        React.createElement("h1", {className: "jumbotron"}, "404 Error Not found")
+      )
+    );
+  }
+});
+
+module.exports = NotFoundPage;
+},{"react":197}],208:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
 
-Router.run(routes, function(Handler){
+Router.run(routes, Router.HistoryLocation, function(Handler){
 React.render(React.createElement(Handler, null), document.getElementById('app'));
 }); 
 
-},{"./routes":207,"react":197,"react-router":28}],207:[function(require,module,exports){
+},{"./routes":209,"react":197,"react-router":28}],209:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
 var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.DefaultRoute;
 
 var routes = (
     React.createElement(Route, {name: "app", path: "/", handler: require('./components/App')}, 
      React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 
       React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage')}), 
-     React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')})
+     React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
+     React.createElement(NotFoundRoute, {handler: require('./components/notFoundRoute')})
+     /* <Redirect from="about-us" to="about" /> */
+     /* <Redirect from="about/*" to="about"/> */
     )
 
 );
 module.exports = routes;
 
-},{"./components/App":200,"./components/about/aboutPage":201,"./components/authors/authorPage":203,"./components/homePage":205,"react":197,"react-router":28}]},{},[206]);
+},{"./components/App":200,"./components/about/aboutPage":201,"./components/authors/authorPage":203,"./components/homePage":206,"./components/notFoundRoute":207,"react":197,"react-router":28}]},{},[208]);
