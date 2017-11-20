@@ -6,8 +6,8 @@ var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.DefaultRoute;
-
 var routes = (
+
   <Route name="app" path="/" handler={require("./components/App")}>
     <DefaultRoute handler={require("./components/homePage")} />
     <Route
@@ -29,5 +29,6 @@ var routes = (
     {/* <Redirect from="about-us" to="about" /> */}
     {/* <Redirect from="about/*" to="about"/> */}
   </Route>
+  
 );
 module.exports = routes;
